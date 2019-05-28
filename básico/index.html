@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="es">
+<!--
+    Un acercamiento a WebAssembly con Go
+
+	@author parzibyte
+	Visita: parzibyte.me/blog
+-->
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>WebAssemby en Go | By Parzibyte</title>
+</head>
+
+<body>
+    <h1>WebAssembly en Go</h1>
+    <a href="//parzibyte.me/blog">By Parzibyte</a>
+    <!-- Cargar los scripts de WASM--->
+    <script src="./wasm_exec.js"></script>
+    <script>
+        const go = new Go();
+        console.log("Cargando el archivo main.wasm");
+        WebAssembly.instantiateStreaming(fetch("main.wasm"), go.importObject)
+            .then((result) => {
+                console.log("Carga completa");
+                go.run(result.instance);
+            });
+    </script>
+</body>
+
+</html>
